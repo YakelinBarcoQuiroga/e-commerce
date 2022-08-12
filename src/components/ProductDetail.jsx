@@ -8,21 +8,25 @@ import { getProductsThunk } from '../store/slices/products.slice';
 
 const ProductDetail = () => {
 
-    const allProduct = useSelector(state => state.products);
-    const [productDetail, setProductDetail] = useState([]);
+    const allProducts = useSelector(state => state.products);
+    const [productDetail, setProductDetail] = useState({});
 
     const {id} = useParams();
-
     const dispatch = useDispatch();
+    console.log(allProducts)
+    console.log(id)
+
+    useEffect(() => {
+        const product = allProducts.find(productItem => Number(productItem.id) === Number(id));
+        console.log(product)
+        setProductDetail(product);
+    }, [allProducts])
 
     useEffect(() =>{
         dispatch(getProductsThunk());
     },[])
 
-    useEffect(() => {
-        const products = allProduct.find(productItem => productItem.id === Number(id))
-        setProductDetail(products);
-    }, [allProduct])
+  
 
     
 
@@ -44,13 +48,13 @@ const ProductDetail = () => {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src={productDetail.productImgs[0]} class="d-block w-100" alt="..." />
+                            <img src={productDetail?.productImgs} class="d-block w-100" alt="..." />
                         </div>
                         <div class="carousel-item">
-                            <img src={productDetail.productImgs[1]} class="d-block w-100" alt="..." />
+                            <img src={productDetail?.productImgs} class="d-block w-100" alt="..." />
                         </div>
                         <div class="carousel-item">
-                            <img src={productDetail.productImgs[2]} class="d-block w-100" alt="..." />
+                            <img src={productDetail?.productImgs} class="d-block w-100" alt="..." />
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -64,12 +68,12 @@ const ProductDetail = () => {
                 </div>
 
                 <div className='detail-product-info'>
-                    <h2 className='detail-product-title'>{productDetail.title}</h2>
-                    <p className='detail-product-description'>{productDetail.description}</p>
+                    <h2 className='detail-product-title'>{productDetail?.title}</h2>
+                    <p className='detail-product-description'>{productDetail?.description}</p>
                     <div className='detail-product-price'>
                         <div>
                             <p>Precio</p>
-                            <h4>$ {productDetail.price}</h4>
+                            <h4>$ {productDetail?.price}</h4>
                         </div>
                         <div className='amount-product'>
                             <div className='change-amount'>+</div>
