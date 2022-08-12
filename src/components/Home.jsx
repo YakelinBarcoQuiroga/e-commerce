@@ -80,7 +80,11 @@ const Home = () => {
                                 <div className='category-container'>
                                     {
                                         categories.map(category => (
-                                            <p key={category.id}>{category.name}</p>
+                                            <p key={category.id}
+                                                    onClick={() => dispatch(filterProductCategory(category.id))}
+                                                >
+                                                    {category.name}
+                                            </p>
                                         ))
                                     }
                                 </div>

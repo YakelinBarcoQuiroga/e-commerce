@@ -1,3 +1,96 @@
 .container-detailProdutc{
-    padding-top: 8rem;
+    padding-top: 6rem;
+    width: 90%;
+    margin: 0rem auto;
+}
+.exit-detailProduct{
+    display: flex;
+}
+.exit-detailProduct a{
+    text-decoration: none;
+    color: black;
+}
+.fa-circle{
+    margin: .5rem 1rem 0rem;
+    font-size: .7rem;
+    color: var(--color-rosa);
+}
+.container-detailProduct{
+    display: flex;
+    margin-top: 2rem;
+}
+.detail-product-info{
+    width: 55%;
+    box-sizing: border-box;
+    padding-left: 5rem;
+}
+.detail-product-title{
+    margin-bottom: 2rem;
+}
+.detail-product-description{
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.detail-product-price{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.detail-product-add{
+    width: 100%;
+    padding: .8rem 0rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-rosa);
+    color: white;
+    font-size: 1.2rem;
+}
+.fa-cart-plus{
+    margin-left: .6rem;
+    font-size: 1.4rem;
+}
+.detail-product-add:hover{
+    background-color: #fd4444;
+}
+.amount-product{
+    display: flex;
+    margin-right: 2rem;
+    margin-top: 1.3rem;
+}
+.amount-product div{
+    padding: .5rem 2.5rem;
+    border: 1px solid var(--color-gray-clear);
+    font-size: 1.3rem;
+}
+.change-amount{
+    cursor: pointer;
+}
+.carousel{
+    width: 45%;
+}
+.carousel-item{
+    height: 30rem;
+}
+.carousel-item img{
+    height: 100%;
+    object-fit: contain;
+}
+.carousel-control-prev-icon{
+    background-color: var(--color-rosa);
+    height: 40px;
+    line-height: 2.2;
+    width: 40px;
+    border-radius: 50%;
+}
+.carousel-control-next-icon{
+    background-color: var(--color-rosa);
+    height: 40px;
+    line-height: 2.2;
+    width: 40px;
+    border-radius: 50%;
+}
+.similar-products{
+    margin: 2rem 0rem;
+    margin-top: 4rem;
+    color: var(--color-rosa);
 }
