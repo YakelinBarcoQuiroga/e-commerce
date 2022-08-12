@@ -8,7 +8,7 @@
     padding: .5rem;
     border-radius: 5px;
     margin-top: .3rem;
-    width: 80%;
+    width: 90%;
 }
 .button-filter-price{
     display: flex;
@@ -58,7 +58,7 @@
     }
 }
 .continer-filter-xl{
-    width: 25%;
+    width: 18%;
     margin-right: 4rem;
     position: fixed;
 }

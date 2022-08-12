@@ -26,6 +26,13 @@ export const filterNameProductThunk = searchValue => (dispatch) => {
         .then((res) => dispatch(setProducts(res.data.data.products)))
         .finally(() => dispatch(setIsLoading(false)));
 }
+
+export const filterProductCategory = (categoryId) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products?category=${categoryId}`)
+        .then((res) => dispatch(setProducts(res.data.data.products)))
+        .finally(() => dispatch(setIsLoading(false)));
+}
 export const { setProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

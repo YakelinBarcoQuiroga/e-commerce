@@ -3,21 +3,28 @@ import "../css/search.css"
 import "../css/ListProducts.css"
 import "../css/filter.css"
 import { useEffect } from 'react';
-import { filterNameProductThunk, getProductsThunk } from '../store/slices/products.slice';
+import { filterNameProductThunk, filterProductCategory, getProductsThunk } from '../store/slices/products.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from "react-router-dom"
 import { useState } from 'react';
+import axios from 'axios';
 const Home = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("");
+    const [categories, setCategories] = useState([])
 
     const products = useSelector(state => state.products)
 
     useEffect(() => {
         dispatch(getProductsThunk());
+
+        axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products/categories")
+            .then(res => setCategories(res.data.data.categories))
     }, [])
+
+    console.log(categories)
 
     return (
         <div className='container-home'>
@@ -40,28 +47,28 @@ const Home = () => {
                 </div>
                 <div className="offcanvas-body">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
+                        {/* <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 <b>Price</b>
                             </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <form action="" className='form-filter-price'>
-                                    <label htmlFor="">From </label>
-                                    <input type="number" className='input-filter-price'/>
-                                    <br /> <br />
-                                    <label htmlFor="">To </label>
-                                    <input type="number" className='input-filter-price'/>
-                                    <br /><br />
-                                    <div className='button-filter-price'>
-                                        <button>Filter price</button>
-                                    </div>
-                                </form>
+                                <div class="accordion-body">
+                                    <form action="" className='form-filter-price'>
+                                        <label htmlFor="">From </label>
+                                        <input type="number" className='input-filter-price'/>
+                                        <br /> <br />
+                                        <label htmlFor="">To </label>
+                                        <input type="number" className='input-filter-price'/>
+                                        <br /><br />
+                                        <div className='button-filter-price'>
+                                            <button>Filter price</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            </div>
-                        </div>
+                        </div> */}
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -71,9 +78,11 @@ const Home = () => {
                             <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <div className='category-container'>
-                                    <p>Smart TV</p>
-                                    <p>Computers</p>
-                                    <p>Smartphones</p>
+                                    {
+                                        categories.map(category => (
+                                            <p key={category.id}>{category.name}</p>
+                                        ))
+                                    }
                                 </div>
                             </div>
                             </div>
@@ -89,7 +98,7 @@ const Home = () => {
                     </div>
                     <div className="offcanvas-body">
                         <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
+                            {/* <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                     <b>Price</b>
@@ -110,7 +119,7 @@ const Home = () => {
                                     </form>
                                 </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -120,9 +129,15 @@ const Home = () => {
                                 <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <div className='category-container'>
-                                        <p>Smart TV</p>
-                                        <p>Computers</p>
-                                        <p>Smartphones</p>
+                                        {
+                                            categories.map(category => (
+                                                <p key={category.id}
+                                                    onClick={() => dispatch(filterProductCategory(category.id))}
+                                                >
+                                                    {category.name}
+                                                </p>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                                 </div>
