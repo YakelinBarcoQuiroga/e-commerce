@@ -1,7 +1,33 @@
 import React from 'react';
 import "../css/detailProduct.css"
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import {useParams} from "react-router-dom"
+import { useEffect } from 'react';
+import { getProductsThunk } from '../store/slices/products.slice';
 
 const ProductDetail = () => {
+
+    const allProduct = useSelector(state => state.products);
+    const [productDetail, setProductDetail] = useState([]);
+
+    const {id} = useParams();
+
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+        dispatch(getProductsThunk());
+    },[])
+
+    useEffect(() => {
+        const products = allProduct.find(productItem => productItem.id === Number(id))
+        setProductDetail(products);
+    }, [allProduct])
+
+    
+
+    console.log(productDetail)
+
     return (
         <div className='container-detailProdutc'>
             <div className='exit-detailProduct'>
@@ -18,13 +44,13 @@ const ProductDetail = () => {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-e1a36.appspot.com/o/img%2Fproducts%2F11-4-h.jpg?alt=media&token=d901375d-fc3c-4ec6-a9aa-768322fd0f69" class="d-block w-100" alt="..." />
+                            <img src={productDetail.productImgs[0]} class="d-block w-100" alt="..." />
                         </div>
                         <div class="carousel-item">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-e1a36.appspot.com/o/img%2Fproducts%2F11-4-i.jpg?alt=media&token=91a7f273-e5c1-41a6-8f6e-2077d2d5df9b" class="d-block w-100" alt="..." />
+                            <img src={productDetail.productImgs[1]} class="d-block w-100" alt="..." />
                         </div>
                         <div class="carousel-item">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-e1a36.appspot.com/o/img%2Fproducts%2F11-4-g.jpg?alt=media&token=873965e3-377b-441a-91ae-9459b80d3f1b" class="d-block w-100" alt="..." />
+                            <img src={productDetail.productImgs[2]} class="d-block w-100" alt="..." />
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -38,12 +64,12 @@ const ProductDetail = () => {
                 </div>
 
                 <div className='detail-product-info'>
-                    <h2 className='detail-product-title'>Nombre del producto</h2>
-                    <p className='detail-product-description'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias tenetur dicta repellendus, quas itaque iusto natus aperiam, expedita, nemo possimus sequi enim aliquam rerum vel amet facilis. Magni vitae voluptatibus consequatur facilis cupiditate praesentium ullam cumque, dolorem, numquam natus, perferendis impedit nam neque? Rerum unde veniam temporibus porro culpa rem!</p>
+                    <h2 className='detail-product-title'>{productDetail.title}</h2>
+                    <p className='detail-product-description'>{productDetail.description}</p>
                     <div className='detail-product-price'>
                         <div>
                             <p>Precio</p>
-                            <h4>$ 38290</h4>
+                            <h4>$ {productDetail.price}</h4>
                         </div>
                         <div className='amount-product'>
                             <div className='change-amount'>+</div>
@@ -57,7 +83,7 @@ const ProductDetail = () => {
 
             <h5 className='similar-products'>Discover similar items</h5>
 
-            <div className='container-card-product'>
+            <div className='container-card-product-detail'>
                 <div class="card-product">
                     <div class="image-card">
                         <img src='' alt="" />

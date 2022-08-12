@@ -54,7 +54,6 @@
 }
 .amount-product{
     display: flex;
-    margin-right: 2rem;
     margin-top: 1.3rem;
 }
 .amount-product div{
@@ -89,8 +88,29 @@
     width: 40px;
     border-radius: 50%;
 }
+.container-card-product-detail{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0rem;
+}
 .similar-products{
     margin: 2rem 0rem;
     margin-top: 4rem;
     color: var(--color-rosa);
+}
+@media (max-width: 992px) {
+    .container-detailProduct{
+        display: block;
+        margin-top: 0rem;
+    }
+    .carousel{
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .detail-product-info{
+        width: 100%;
+        padding-left: 0rem;
+        margin-top: 4rem;
+    }
 }
